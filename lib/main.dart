@@ -1,15 +1,20 @@
 import 'package:flu_appone/Dashboard.dart';
 import 'package:flu_appone/FirstScreen.dart';
+import 'package:flu_appone/HiveForm.dart';
+import 'package:flu_appone/HiveDemo2.dart';
 import 'package:flu_appone/ListScreen.dart';
 import 'package:flu_appone/LoginScreen.dart';
 import 'package:flu_appone/SecondScreen.dart';
 import 'package:flutter/material.dart';
 import 'dart:math'; // Import the math library
+import 'package:path_provider/path_provider.dart';
+import 'package:hive/hive.dart';
 
-void main() {
-  runApp(
-   MyApp()
-  );
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  var directory = await getApplicationDocumentsDirectory();
+  Hive.init(directory.path);
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget{
@@ -35,7 +40,7 @@ class MyApp extends StatelessWidget{
 
     ),
    routes: {
-      "/": (context) => LoginScreen(),
+      "/": (context) => HiveDemo2(),
      "/dashboard" : (context) => Dashboard(value: "HELLO WORLD"),
      "/listscreen" : (context) => ListScreen(),
 
